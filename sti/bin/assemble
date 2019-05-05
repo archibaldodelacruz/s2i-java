@@ -38,7 +38,16 @@ manage_incremental_build
 
 # If a pom.xml is present, this is a normal build scenario
 # so run maven.
-if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
+
+
+if [ -z "$POM_DIR" ]; then
+    POM_DIR="pom.xml"
+else
+    POM_DIR="$POM_DIR/pom.xml"
+fi
+
+
+if [ -f "$LOCAL_SOURCE_DIR/$POM_DIR" ]; then
   # the subdirectory within LOCAL_SOURCE_DIR from where we should copy build
   # artifacts (*.war, *.jar)
   ARTIFACT_DIR=${ARTIFACT_DIR:-target}
