@@ -1,6 +1,6 @@
 # s2i-java
 FROM openshift/base-centos7
-MAINTAINER Jorge Morales <jmorales@redhat.com>
+MAINTAINER Vìctor Merino <victor.merino@sonda.com>
 # HOME in base image is /opt/app-root/src
 
 # Install build tools on top of base image
@@ -32,7 +32,7 @@ ENV PATH=/opt/maven/bin/:/opt/gradle/bin/:$PATH
 
 ENV BUILDER_VERSION 1.0
 
-LABEL io.k8s.description="Platform for building Java (fatjar) applications with maven or gradle" \
+LABEL io.k8s.description="Imagen base para crear imágenes JAR con MAven o Gradle" \
       io.k8s.display-name="Java S2I builder 1.0" \
       io.openshift.expose-services="8080:http" \
       io.openshift.tags="builder,maven-3,gradle-2.6,java,microservices,fatjar"
@@ -45,10 +45,10 @@ COPY ./contrib/settings.xml $HOME/.m2/
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
 COPY ./sti/bin/ /usr/local/sti
 
-RUN chown -R 1001:1001 /opt/openshift
+RUN chown -R 1000:1000 /opt/openshift
 
 # This default user is created in the openshift/base-centos7 image
-USER 1001
+USER 1000
 
 # Set the default port for applications built using this image
 EXPOSE 8080

@@ -139,6 +139,17 @@ else
   copy_artifacts "$ARTIFACT_DIR" jar
 fi
 
+if [ -d $LOCAL_SOURCE_DIR/cfg ]; then
+  echo "Copying config files from project..."
+  mkdir  ${DEPLOY_DIR}/etc
+  cp -R cfg/*  ${DEPLOY_DIR}/etc
+  chgrp -R 0  ${DEPLOY_DIR}/etc
+  chmod -R g+rw  ${DEPLOY_DIR}/etc
+fi
+
+
+
+
 # As Microservices you should only have 1 fat jar
 # if compgen -G "/tmp/src/*" >/dev/null; then
 # TODO: Review how best move these
